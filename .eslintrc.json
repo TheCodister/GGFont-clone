@@ -34,7 +34,6 @@
     "no-unused-vars": "warn", // Disabled as it's handled by @typescript-eslint/no-unused-vars
     "prefer-const": "error", // Enforce the use of const over let where possible
     "eqeqeq": ["error", "always"], // Enforce the use of === and !==
-    "curly": ["error", "all"], // Enforce consistent brace style for all control statements
     "arrow-body-style": ["error", "as-needed"], // Enforce consistent arrow function body style
     "no-duplicate-imports": "error" // Disallow duplicate imports
   },
