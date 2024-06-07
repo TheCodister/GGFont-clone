@@ -16,6 +16,12 @@
       "eslint --fix"
     ]
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "@radix-ui/themes": "^3.0.5",
     "axios": "^1.7.2",
