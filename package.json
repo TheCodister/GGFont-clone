@@ -7,10 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit",
+    "commit": "commit"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
   },
