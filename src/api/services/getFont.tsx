@@ -18,6 +18,18 @@ const GetFonts = () => {
     isError: error,
   };
 };
+// const getFonts = async () => {
+//   return axios
+//     .get(`https://www.googleapis.com/webfonts/v1/webfonts?key=${API_KEY}`)
+//     .then((result) => ({
+//       status: "ok",
+//       data: result.data,
+//     }))
+//     .catch((error) => ({
+//       status: "error",
+//       error: error.data,
+//     }));
+// };
 
 // const getFontVariantFile = async (fileUrl: string) => {
 //   return axios
