@@ -1,6 +1,7 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 import { GetFonts } from "@/api/services/getFont";
+
 export default function Home() {
   const { data, isLoading, isError } = GetFonts();
   if (isLoading) {
@@ -17,6 +18,7 @@ export default function Home() {
       <button className="fixed top-0 right-0 p-4 m-4 text-sm font-semibold text-white bg-black rounded-lg dark:bg-white dark:text-black">
         Click here to fetchdata
       </button>
+      <img src="" alt="Vercel Logo" className="h-12" />
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-4xl font-bold text-center">Welcome to Next.js</h1>
         <p className="text-lg text-center">Get started by editing</p>

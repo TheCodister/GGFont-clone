@@ -31,10 +31,10 @@ const GetFonts = () => {
 //       error: error.data,
 //     }));
 // };
-const fetchFontVariant = async (fileUrl: string) => {
+async function fetchFontVariant(fileUrl: string) {
   const res = await axios.get(fileUrl, { responseType: "blob" });
   return res;
-};
+}
 const GetFontVariantFile = async (fileUrl: string) => {
   const { data, error } = useSWR(fileUrl, fetchFontVariant);
   return {
