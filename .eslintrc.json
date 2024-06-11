@@ -35,7 +35,7 @@
     "prefer-const": "error", // Enforce the use of const over let where possible
     "eqeqeq": ["error", "always"], // Enforce the use of === and !==
     "arrow-body-style": ["error", "as-needed"], // Enforce consistent arrow function body style
-    "no-duplicate-imports": "error" // Disallow duplicate imports
+    "no-duplicate-imports": "warn" // Disallow duplicate imports
   },
   "overrides": [
     {

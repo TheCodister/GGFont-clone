@@ -19,6 +19,9 @@ const GetFonts = () => {
   };
 };
 
+const a = 1;
+console.log(a);
+
 // const getFontVariantFile = async (fileUrl: string) => {
 //   return axios
 //     .get(fileUrl, { responseType: "blob" })
