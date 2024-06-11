@@ -6,7 +6,6 @@ import HoverCardDemo from "../HoverCard/HoverCard";
 import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
 import BagButton from "../BagButton/BagButton";
 import Tune from "/src/assets/tune.svg";
-import Bag from "/src/assets/shoppingbag.svg";
 import { Button } from "@radix-ui/themes";
 export default function Navbar() {
   return (
