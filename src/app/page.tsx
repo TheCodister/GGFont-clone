@@ -1,5 +1,3 @@
-// import Image from "next/image";
-import { GetFonts } from "@/api/services/getFont";
 import ListFontDisplay from "@/components/ListFontDisplay/ListFontDisplay";
 export default function Home() {
   return (
