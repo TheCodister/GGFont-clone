@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @import "@radix-ui/themes/styles.css";
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -12,10 +11,9 @@ body {
     )
     rgb(var(--background-start-rgb));
   display: flex;
-  justify-content: center;
-  font-family: "Outfit", sans-serif;
+  flex-direction: column;
+  align-items: center;
 }
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;

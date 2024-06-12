@@ -1,15 +1,15 @@
 "use client";
 import Image from "next/image";
-import logo from "/src/assets/logo.png";
+import logo from "@/assets/logo.png";
 import SearchBar from "../SearchBar/SearchBar";
 import HoverCardDemo from "../HoverCard/HoverCard";
 import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
 import BagButton from "../BagButton/BagButton";
-import Tune from "/src/assets/tune.svg";
+import Tune from "@/assets/tune.svg";
 import { Button } from "@radix-ui/themes";
 export default function Navbar() {
   return (
-    <nav className="flex flex-col items-center w-min justify-center h-auto mt-5">
+    <nav className="flex flex-col items-center w-min justify-center h-auto mt-5 sticky">
       <div className="flex flex-row justify-center items-center">
         <Image
           src={logo}

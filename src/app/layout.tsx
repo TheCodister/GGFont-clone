@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { Theme } from "@radix-ui/themes";
 import Navbar from "@/components/Navbar/Navbar";
+import { AppWrapper } from "@/contexts/context";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,11 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Theme>
-          <Navbar />
-          {children}
-        </Theme>
+      <body className={outfit.className}>
+        <AppWrapper>
+          <Theme className="flex flex-col items-center">
+            <Navbar />
+            {children}
+          </Theme>
+        </AppWrapper>
       </body>
     </html>
   );

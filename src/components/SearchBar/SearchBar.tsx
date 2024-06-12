@@ -1,6 +1,6 @@
 "use client";
 import { TextField } from "@radix-ui/themes";
-import SearchIcon from "/src/assets/search.svg";
+import SearchIconUrl from "/src/assets/search.svg";
 import Image from "next/image";
 export default function SearchBar() {
   return (
@@ -13,7 +13,7 @@ export default function SearchBar() {
       color="gray"
     >
       <TextField.Slot>
-        <Image src={SearchIcon} width={20} height={20} alt="logo" />
+        <Image src={SearchIconUrl} width={20} height={20} alt="logo" />
       </TextField.Slot>
     </TextField.Root>
   );

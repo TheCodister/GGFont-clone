@@ -1,4 +1,3 @@
-import React from "react";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
 
