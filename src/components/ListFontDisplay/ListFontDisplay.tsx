@@ -36,10 +36,9 @@ export default function ListFontDisplay() {
       </div>
     );
   }
-  if (data)
-    return (
-      <div className="flex w-full">
-        {/* <InfiniteScroll
+  return (
+    <div className="flex w-full">
+      {/* <InfiniteScroll
           dataLength={data.data.items.length}
           next={GetFonts}
           hasMore={true}
@@ -54,23 +53,23 @@ export default function ListFontDisplay() {
               />
             ))}
         </InfiniteScroll> */}
-        {view ? (
-          <div className="flex flex-col gap-2 w-[90em] overflow-auto">
-            <FontCard fontName="Name" numVariants={1} creator="Google" />
-            <FontCard fontName="Name" numVariants={1} creator="Google" />
-            <FontCard fontName="Name" numVariants={1} creator="Google" />
-            <FontCard fontName="Name" numVariants={1} creator="Google" />
-            <FontCard fontName="Name" numVariants={1} creator="Google" />
-          </div>
-        ) : (
-          <div className="grid gap-5 lg:grid-cols-4 w-full overflow-auto md:grid-cols-2 ">
-            <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-            <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-            <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-            <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-            <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          </div>
-        )}
-      </div>
-    );
+      {view ? (
+        <div className="flex flex-col gap-2 w-[90em] overflow-auto">
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+        </div>
+      ) : (
+        <div className="grid gap-5 lg:grid-cols-4 w-full overflow-auto md:grid-cols-2 ">
+          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+        </div>
+      )}
+    </div>
+  );
 }
