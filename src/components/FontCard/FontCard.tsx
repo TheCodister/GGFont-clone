@@ -1,27 +1,49 @@
+import Link from "next/link";
+import useLazyLoad from "@/hooks/useLazyLoad/useLazyLoad";
+import { useAppContext } from "@/contexts/context";
 interface FontCardProps {
   fontName: string;
   numVariants: number;
   creator: string;
 }
-
 export default function FontCard(props: FontCardProps) {
+  const [isIntersecting, ref] = useLazyLoad();
   const name = props.fontName;
-  const ref = "https://fonts.googleapis.com/css?family=" + name;
+  const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
+  const link = "http://localhost:3000/FontDetail/";
+  const { setFontView, setFontDetailName } = useAppContext();
+  const handleClick = () => {
+    setFontDetailName(name);
+    setFontView(true);
+  };
   return (
-    <div className="flex flex-col w-[89em] border-solid border-b-2 p-5 hover:bg-slate-100 cursor-pointer rounded">
-      <div className="flex gap-3 items-center">
-        <h2 className="font-semibold">{name}</h2>
-        <p>{props.numVariants} varient</p>
-        <p>|</p>
-        <p>{props.creator}</p>
-      </div>
-      <link rel="stylesheet" href={ref}></link>
-      <h1
-        className="text-5xl overflow-hidden pt-5 pb-5"
-        style={{ fontFamily: `${name}, sans-serif` }}
+    <Link href={link}>
+      <div
+        ref={ref}
+        className="flex flex-col lg:w-[86em] md:w-[50em] border-solid border-b-2 p-5 hover:bg-slate-100 cursor-pointer rounded"
+        onClick={() => handleClick()}
+        role="button"
+        tabIndex={0}
+        onKeyDown={() => {}}
       >
-        Whereas disregard and contempt for human rights have resulted
-      </h1>
-    </div>
+        <div className="flex gap-3 items-center">
+          <h2 className="font-semibold">{name}</h2>
+          <p>{props.numVariants} varient</p>
+          <p>|</p>
+          <p>{props.creator}</p>
+        </div>
+        {isIntersecting && (
+          <>
+            <link rel="stylesheet" href={fontUrl}></link>
+            <h1
+              className="text-5xl overflow-hidden pt-5 pb-5"
+              style={{ fontFamily: `${name}, sans-serif` }}
+            >
+              Whereas disregard and contempt for human rights have resulted
+            </h1>
+          </>
+        )}
+      </div>
+    </Link>
   );
 }

@@ -2,14 +2,14 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import SearchBar from "../SearchBar/SearchBar";
-import HoverCardDemo from "../HoverCard/HoverCard";
-import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
+
 import BagButton from "../BagButton/BagButton";
 import Tune from "@/assets/tune.svg";
+
 import { Button } from "@radix-ui/themes";
 export default function Navbar() {
   return (
-    <nav className="flex flex-col items-center w-min justify-center h-auto mt-5 sticky">
+    <nav className="flex flex-col items-center justify-center h-auto mt-5 sticky">
       <div className="flex flex-row justify-center items-center">
         <Image
           src={logo}
@@ -30,13 +30,6 @@ export default function Navbar() {
       >
         <Image src={Tune} width={20} height={20} alt="logo" /> Filters
       </Button>
-      <div className="flex items-center w-full justify-between mt-8">
-        <p className="justify-self-start text-xs">1644 of 1644 families</p>
-        <div className="flex items-center">
-          <HoverCardDemo />
-          <SwitchViewButton />
-        </div>
-      </div>
     </nav>
   );
 }

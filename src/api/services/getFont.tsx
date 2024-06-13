@@ -19,19 +19,6 @@ const GetFonts = () => {
   };
 };
 
-// const getFontVariantFile = async (fileUrl: string) => {
-//   return axios
-//     .get(fileUrl, { responseType: "blob" })
-//     .then((result) => ({
-//       status: "ok",
-//       data: result.data,
-//     }))
-//     .catch((error) => ({
-//       status: "error",
-//       error: error.data,
-//     }));
-// };
-
 async function fetchFontVariant(fileUrl: string) {
   const res = await axios.get(fileUrl, { responseType: "blob" });
   return res;

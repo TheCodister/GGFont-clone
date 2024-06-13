@@ -4,6 +4,8 @@ import FontCard from "../FontCard/FontCard";
 import FontCardGrid from "../FontCardGrid/FontCardGrid";
 import { GetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
+import HoverCardDemo from "../HoverCard/HoverCard";
+import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
 // import GetKey from "@/utils/GetKey/Getkey";
 // import useSWRInfinite from "swr/infinite";
 interface Font {
@@ -36,41 +38,43 @@ export default function ListFontDisplay() {
       </div>
     );
   }
-  if (data) {
-    console.log(data.data.items);
-  }
   return (
-    <div className="flex w-full">
-      {/* <InfiniteScroll
-          dataLength={data.data.items.length}
-          next={GetFonts}
-          hasMore={true}
-          loader={<h1>Loading</h1>}
-        >
+    <div className="flex flex-col w-full">
+      <div className="flex items-center w-full justify-between mb-8">
+        <p className="justify-self-start text-xs">1644 of 1644 families</p>
+        <div className="flex items-center">
+          <HoverCardDemo />
+          <SwitchViewButton />
+        </div>
+      </div>
+      {view ? (
+        <div className="flex flex-col items-center gap-2 w-full overflow-auto">
+          {/* <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" />
+          <FontCard fontName="Name" numVariants={1} creator="Google" /> */}
           {data &&
             data.data.items.map((font: Font) => (
               <FontCard
                 fontName={font.family}
                 numVariants={font.variants.length}
                 creator="Google"
+                key={font.family}
               />
             ))}
-        </InfiniteScroll> */}
-      {view ? (
-        <div className="flex flex-col gap-2 w-[90em] overflow-auto">
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
         </div>
       ) : (
-        <div className="grid gap-5 lg:grid-cols-4 w-full overflow-auto md:grid-cols-2 ">
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+        <div className="grid gap-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full overflow-auto ">
+          {data &&
+            data.data.items.map((font: Font) => (
+              <FontCardGrid
+                fontName={font.family}
+                numVariants={font.variants.length}
+                creator="Google"
+                key={font.family}
+              />
+            ))}
         </div>
       )}
     </div>
