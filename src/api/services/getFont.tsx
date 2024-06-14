@@ -3,8 +3,7 @@ import useSWR from "swr";
 // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const fetcher = async () => {
   const res = await axios.get(
-    "https://www.googleapis.com/webfonts/v1/webfonts?key=" +
-      process.env.NEXT_PUBLIC_API_KEY
+    "https://www.googleapis.com/webfonts/v1/webfonts?key=" + process.env.API
   );
   return res;
 };
