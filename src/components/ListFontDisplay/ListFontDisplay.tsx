@@ -5,20 +5,7 @@ import { GetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
 import HoverCardDemo from "../HoverCard/HoverCard";
 import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
-// import GetKey from "@/utils/GetKey/Getkey";
-// import useSWRInfinite from "swr/infinite";
-interface Font {
-  family: string;
-  variants: string[];
-  category: string;
-  files: {
-    [key: string]: string;
-  };
-  version: string;
-  lastModified: string;
-  subsets: string[];
-  kind: string;
-}
+import Font from "@/types/Font";
 export default function ListFontDisplay() {
   // const { data, size, setSize } = useSWRInfinite(GetKey, GetFonts);
   const { view } = useAppContext();

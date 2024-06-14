@@ -15,7 +15,7 @@ export default function FontCardGrid(props: FontCardProps) {
     setFontDetailName(name);
     setFontView(true);
   };
-  const link = "http://localhost:3000/FontDetail/";
+  const link = "/FontDetail";
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
   return (
     <Link href={link}>
