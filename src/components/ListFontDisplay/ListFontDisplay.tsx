@@ -1,5 +1,4 @@
 "use client";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import FontCard from "../FontCard/FontCard";
 import FontCardGrid from "../FontCardGrid/FontCardGrid";
 import { GetFonts } from "@/api/services/getFont";
