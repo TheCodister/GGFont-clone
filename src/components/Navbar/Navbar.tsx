@@ -28,7 +28,7 @@ export default function Navbar() {
         color="indigo"
         className="h-12 w-26 self-start mt-5"
       >
-        <Image src={Tune} width={20} height={20} alt="logo" /> Filters
+        <Tune width={20} height={20} alt="logo" /> Filters
       </Button>
     </nav>
   );

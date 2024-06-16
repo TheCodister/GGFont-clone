@@ -5,8 +5,10 @@ import PreviewText from "@/components/PreviewText/PreviewText";
 import SliderBar from "@/components/SliderBar/SliderBar";
 import SelectBar from "@/components/SelectBar/SelectBar";
 import FontVarCard from "@/components/FontVarCard/FontVarCard";
+import { usePathname } from "next/navigation";
 export default function FontDetail() {
-  const { fontdetailname } = useAppContext();
+  const pathname = usePathname();
+  const fontdetailname = pathname.replace("/FontDetail/", "");
   const fontUrl = `https://fonts.googleapis.com/css?family=${fontdetailname}`;
   const { data, isLoading, isError } = GetFontVariantFile(fontdetailname);
   if (isLoading) {
@@ -23,7 +25,6 @@ export default function FontDetail() {
       </div>
     );
   }
-  if (data) console.log(data[0].variants);
   return (
     <div className="flex flex-col gap-5 w-full mt-5">
       <h1 className="text-5xl font-semibold">{fontdetailname}</h1>

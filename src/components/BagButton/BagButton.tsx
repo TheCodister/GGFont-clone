@@ -14,7 +14,7 @@ export default function BagButton() {
           radius="full"
           className="ml-5 bg-transparent hover:bg-gray-200"
         >
-          <Image src={Bag} width={25} height={25} alt="logo" />
+          <Bag width={25} height={25} alt="logo" />
         </IconButton>
       </HoverCard.Trigger>
       <HoverCard.Portal>

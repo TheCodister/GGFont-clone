@@ -13,7 +13,7 @@ export default function SearchBar() {
       color="gray"
     >
       <TextField.Slot>
-        <Image src={SearchIconUrl} width={20} height={20} alt="logo" />
+        <SearchIconUrl width={25} height={25} alt="logo" />
       </TextField.Slot>
     </TextField.Root>
   );
