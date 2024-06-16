@@ -9,6 +9,7 @@ interface FontCardProps {
 
 export default function FontVarCard(props: FontCardProps) {
   const [isIntersecting, ref] = useLazyLoad();
+  const { textPreview } = useAppContext();
   const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
   return (
@@ -30,7 +31,7 @@ export default function FontVarCard(props: FontCardProps) {
               fontStyle: `${props.variant}`,
             }}
           >
-            Whereas disregard and contempt for human rights have resulted
+            {textPreview}
           </h1>
         </>
       )}

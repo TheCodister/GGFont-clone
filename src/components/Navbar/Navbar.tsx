@@ -10,13 +10,13 @@ import { Button } from "@radix-ui/themes";
 export default function Navbar() {
   return (
     <nav className="flex flex-col items-center justify-center h-auto mt-5 sticky">
-      <div className="flex flex-row justify-center items-center">
+      <div className="flex flex-row justify-center items-center max-w-full">
         <Image
           src={logo}
           width={200}
           height={300}
           alt="logo"
-          className="mr-7"
+          className="mr-0 md:mr-7 mb-4 md:mb-0"
         />
         <SearchBar />
         <BagButton />

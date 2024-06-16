@@ -10,8 +10,8 @@ export default function FontCard(props: FontCardProps) {
   const [isIntersecting, ref] = useLazyLoad();
   const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
-  const link = "/FontDetail";
-  const { setFontView, setFontDetailName } = useAppContext();
+  const link = "/FontDetail/" + name;
+  const { setFontView, setFontDetailName, textPreview } = useAppContext();
   const handleClick = () => {
     setFontDetailName(name);
     setFontView(true);
@@ -20,7 +20,7 @@ export default function FontCard(props: FontCardProps) {
     <Link href={link}>
       <div
         ref={ref}
-        className="flex flex-col lg:w-[86em] md:w-[50em] border-solid border-b-2 p-5 hover:bg-slate-100 cursor-pointer rounded"
+        className="flex flex-col h-52 lg:w-[86em] md:w-[50em] border-solid border-b-2 p-5 hover:bg-slate-100 cursor-pointer rounded"
         onClick={() => handleClick()}
         role="button"
         tabIndex={0}
@@ -39,7 +39,7 @@ export default function FontCard(props: FontCardProps) {
               className="text-5xl overflow-hidden pt-5 pb-5"
               style={{ fontFamily: `${name}, sans-serif` }}
             >
-              Whereas disregard and contempt for human rights have resulted
+              {textPreview}
             </h1>
           </>
         )}

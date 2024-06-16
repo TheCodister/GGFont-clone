@@ -10,12 +10,12 @@ interface FontCardProps {
 export default function FontCardGrid(props: FontCardProps) {
   const name = props.fontName;
   const [isIntersecting, ref] = useLazyLoad();
-  const { setFontView, setFontDetailName } = useAppContext();
+  const { setFontView, setFontDetailName, textPreview } = useAppContext();
   const handleClick = () => {
     setFontDetailName(name);
     setFontView(true);
   };
-  const link = "/FontDetail";
+  const link = "/FontDetail/" + name;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
   return (
     <Link href={link}>
@@ -39,7 +39,7 @@ export default function FontCardGrid(props: FontCardProps) {
               className="text-5xl overflow-hidden pt-5 pb-5"
               style={{ fontFamily: `${name}, sans-serif` }}
             >
-              Whereas disregard and contempt for human rights have resulted
+              {textPreview}
             </h1>
           </>
         )}
