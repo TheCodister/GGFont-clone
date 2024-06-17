@@ -21,15 +21,6 @@ export default function Navbar() {
         <SearchBar />
         <BagButton />
       </div>
-      <Button
-        size="3"
-        variant="outline"
-        radius="full"
-        color="indigo"
-        className="h-12 w-26 self-start mt-5"
-      >
-        <Tune width={20} height={20} alt="logo" /> Filters
-      </Button>
     </nav>
   );
 }

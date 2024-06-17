@@ -6,8 +6,9 @@ import { useAppContext } from "@/contexts/context";
 import HoverCardDemo from "../HoverCard/HoverCard";
 import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
 import Font from "@/types/Font";
+import { Button } from "@radix-ui/themes";
+import Tune from "@/assets/tune.svg";
 export default function ListFontDisplay() {
-  // const { data, size, setSize } = useSWRInfinite(GetKey, GetFonts);
   const { view } = useAppContext();
   const { data, isLoading, isError } = GetFonts();
   if (isLoading) {
@@ -26,6 +27,15 @@ export default function ListFontDisplay() {
   }
   return (
     <div className="flex flex-col w-full">
+      <Button
+        size="3"
+        variant="outline"
+        radius="full"
+        color="indigo"
+        className="h-12 w-26 self-start mb-5"
+      >
+        <Tune width={20} height={20} alt="logo" /> Filters
+      </Button>
       <div className="flex items-center w-full justify-between mb-8">
         <p className="justify-self-start text-xs">1644 of 1644 families</p>
         <div className="flex items-center">
@@ -35,11 +45,6 @@ export default function ListFontDisplay() {
       </div>
       {view ? (
         <div className="flex flex-col items-center gap-2 w-full overflow-auto">
-          {/* <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" /> */}
           {data &&
             data.data.items.map((font: Font) => (
               <FontCard
