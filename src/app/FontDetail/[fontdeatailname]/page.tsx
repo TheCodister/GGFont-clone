@@ -7,8 +7,9 @@ import SelectBar from "@/components/SelectBar/SelectBar";
 import FontVarCard from "@/components/FontVarCard/FontVarCard";
 import { usePathname } from "next/navigation";
 export default function FontDetail() {
-  const pathname = usePathname();
-  const fontdetailname = pathname.replace("/FontDetail/", "");
+  const fontdetailname = usePathname()
+    .replace("/FontDetail/", "")
+    .replace(/%20/g, " ");
   const fontUrl = `https://fonts.googleapis.com/css?family=${fontdetailname}`;
   const { data, isLoading, isError } = GetFontVariantFile(fontdetailname);
   if (isLoading) {

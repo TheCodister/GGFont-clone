@@ -6,20 +6,24 @@ interface AppContextType {
   fontview: boolean;
   fontdetailname: string;
   textPreview: string;
+  size: number;
   setFontDetailName: (fontdetailname: string) => void;
   setView: (view: boolean) => void;
   setFontView: (fontview: boolean) => void;
   setTextPreview: (textPreview: string) => void;
+  setSize: (size: number) => void;
 }
 const defaultType = {
   view: false,
   fontview: false,
   fontdetailname: "", // Corrected the property name
   textPreview: "Whereas disregard and contempt for human rights have resulted",
+  size: 8,
   setFontDetailName: (fontdetailname: string) => {},
   setView: (view: boolean) => {},
   setFontView: (fontview: boolean) => {},
   setTextPreview: (textPreview: string) => {},
+  setSize: (size: number) => {},
 };
 const AppContext = createContext<AppContextType>(defaultType);
 export function AppWrapper({ children }: { children: React.ReactNode }) {
@@ -29,6 +33,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [textPreview, setTextPreview] = useState(
     "Whereas disregard and contempt for human rights have resulted"
   );
+  const [size, setSize] = useState(8);
   return (
     <AppContext.Provider
       value={{
@@ -40,6 +45,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         setFontDetailName,
         textPreview,
         setTextPreview,
+        size,
+        setSize,
       }}
     >
       {children}
