@@ -11,19 +11,7 @@ interface FontCardProps {
 const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
   const [isIntersecting, ref] = useLazyLoad();
   const fontUrl = `https://fonts.googleapis.com/css?family=${fontName}`;
-  const {
-    setFontView,
-    setFontDetailName,
-    textPreview,
-    toggleVariant,
-    selectedFont,
-  } = useAppContext();
-
-  const handleClick = () => {
-    setFontDetailName(fontName);
-    setFontView(true);
-    console.log(variant);
-  };
+  const { textPreview, toggleVariant, selectedFont } = useAppContext();
 
   const handleVariantToggle = (variant: string, enabled: boolean) => {
     toggleVariant(fontName, variant, enabled);
@@ -33,7 +21,6 @@ const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
     <div
       ref={ref}
       className="flex flex-col lg:w-[30em] md:w-[15em] border-solid border-2 rounded-xl"
-      onClick={handleClick}
     >
       <div className="flex flex-col gap-3 items-center p-5">
         <div className="flex gap-5 self-start">

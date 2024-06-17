@@ -2,11 +2,7 @@
 import Image from "next/image";
 import logo from "@/assets/logo.png";
 import SearchBar from "../SearchBar/SearchBar";
-
 import BagButton from "../BagButton/BagButton";
-import Tune from "@/assets/tune.svg";
-
-import { Button } from "@radix-ui/themes";
 export default function Navbar() {
   return (
     <nav className="flex flex-col items-center justify-center h-auto mt-5 sticky">
