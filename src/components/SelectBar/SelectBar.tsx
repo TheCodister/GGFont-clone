@@ -5,7 +5,7 @@ export default function SelectBar() {
   const sizeOptions = Array.from({ length: 293 }, (_, i) => `${8 + i}px`);
   return (
     <Select.Root
-      defaultValue="8px"
+      defaultValue="48px"
       size="3"
       value={size}
       onValueChange={() => setSize(size)}
@@ -16,8 +16,10 @@ export default function SelectBar() {
         className="border-none hover:bg-slate-100 font-semibold"
       />
       <Select.Content className="font-semibold">
-        {sizeOptions.map((size) => (
-          <Select.Item value={size}>{size}</Select.Item>
+        {sizeOptions.map((size, index) => (
+          <Select.Item key={index} value={size}>
+            {size}
+          </Select.Item>
         ))}
       </Select.Content>
     </Select.Root>
