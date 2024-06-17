@@ -2,7 +2,6 @@
   "extends": [
     // "plugin:@next/next/recommended",
     "next",
-    "./@dwarvesf/react-eslint-config",
     "next/core-web-vitals",
     "plugin:jsx-a11y/recommended"
   ],
