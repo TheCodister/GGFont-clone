@@ -18,6 +18,7 @@ interface AppContextType {
   setSize: (size: string) => void;
   addFont: (font: Font) => void;
   removeFont: (family: string) => void;
+  toggleVariant: (family: string, variant: string, enabled: boolean) => void;
 }
 
 const defaultType: AppContextType = {
@@ -36,6 +37,7 @@ const defaultType: AppContextType = {
   setSize: () => {},
   addFont: () => {},
   removeFont: () => {},
+  toggleVariant: () => {},
 };
 
 const AppContext = createContext<AppContextType>(defaultType);
@@ -47,7 +49,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [textPreview, setTextPreview] = useState(
     "Whereas disregard and contempt for human rights have resulted"
   );
-  const [size, setSize] = useState("8px");
+  const [size, setSize] = useState("48px");
   const [selectedFont, setSelectedFont] = useState<Font[]>([]);
   const [selected, setSelected] = useState(false);
 
@@ -92,6 +94,30 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const toggleVariant = (family: string, variant: string, enabled: boolean) => {
+    setSelectedFont((prevSelectedFonts) => {
+      const updatedFonts = prevSelectedFonts.map((font) => {
+        if (font.family === family) {
+          let updatedVariants: string[];
+          if (enabled) {
+            // Enable the variant (add to the array if not already included)
+            updatedVariants = [...font.variants];
+            if (!updatedVariants.includes(variant)) {
+              updatedVariants.push(variant);
+            }
+          } else {
+            // Disable the variant (remove from the array)
+            updatedVariants = font.variants.filter((v) => v !== variant);
+          }
+
+          return { ...font, variants: updatedVariants };
+        }
+        return font;
+      });
+      return updatedFonts;
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -110,6 +136,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         removeFont,
         selected,
         setSelected,
+        toggleVariant,
       }}
     >
       {children}

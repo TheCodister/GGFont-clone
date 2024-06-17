@@ -10,7 +10,7 @@ export default function FontCard(props: FontCardProps) {
   const [isIntersecting, ref] = useLazyLoad();
   const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
-  const link = "/FontDetail/" + name;
+  const link = "/fontdetail/" + name;
   const { setFontView, setFontDetailName, textPreview } = useAppContext();
   const handleClick = () => {
     setFontDetailName(name);

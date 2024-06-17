@@ -5,7 +5,7 @@ import * as HoverCard from "@radix-ui/react-hover-card";
 
 export default function BagButton() {
   return (
-    <Link href="/Selection">
+    <Link href="/selection">
       <HoverCard.Root openDelay={100} closeDelay={100}>
         <HoverCard.Trigger asChild>
           <IconButton

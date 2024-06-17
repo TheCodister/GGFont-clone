@@ -19,7 +19,7 @@ export default function FontDetail() {
     setFontDetailName,
   } = useAppContext();
   const pathFontName = usePathname()
-    .replace("/FontDetail/", "")
+    .replace("/fontdetail/", "")
     .replace(/%20/g, " ");
 
   useEffect(() => {
