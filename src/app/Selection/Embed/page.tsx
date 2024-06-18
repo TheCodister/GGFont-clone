@@ -4,51 +4,30 @@ import { useEffect, useState } from "react";
 import ArrowBack from "@/assets/arrowback.svg";
 import Link from "next/link";
 import CustomizeLinkCard from "@/components/CustomizeLinkCard/CustomizeLinkCard";
+import { generateEmbedCode, generateCssCode, returnURL } from "@/utils";
+import { Checkbox } from "@radix-ui/themes";
 
 export default function EmbeddedCode() {
-  const { selectedFont } = useAppContext();
+  const { selectedFont, enabledVariants, setEnabledVariants } = useAppContext();
   const [embedCode, setEmbedCode] = useState("");
   const [cssCode, setCssCode] = useState("");
+  const [checked, setChecked] = useState(true);
 
+  setEnabledVariants(selectedFont);
   useEffect(() => {
-    if (selectedFont.length > 0) {
-      const fontLinks = selectedFont.map((font) => {
-        const enabledVariants = font.variants.filter(
-          (variant) => variant !== ""
-        );
-        const family = font.family.replace(/ /g, "+");
-        return `family=${family}:${enabledVariants.join(";")}`;
-      });
-
-      const htmlCode = `
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?${fontLinks.join("&")}&display=swap" rel="stylesheet">
-      `;
-
-      const cssClasses = selectedFont
-        .map((font) =>
-          font.variants
-            .filter((variant) => variant !== "")
-            .map((variant) => {
-              const [weight, style] = variant.includes("italic")
-                ? variant.split("italic")
-                : [variant, "normal"];
-              return `
-.${font.family.toLowerCase().replace(/ /g, "-")}-${weight}-${style} {
-  font-family: "${font.family}", sans-serif;
-  font-weight: ${weight};
-  font-style: ${style};
-}`;
-            })
-            .join("\n")
-        )
-        .join("\n");
-
-      setEmbedCode(htmlCode.trim());
-      setCssCode(cssClasses.trim());
+    if (enabledVariants.length > 0) {
+      setEmbedCode(generateEmbedCode(enabledVariants));
+      setCssCode(generateCssCode(enabledVariants));
+    } else {
+      setEmbedCode("");
+      setCssCode("");
     }
-  }, [selectedFont]);
+  }, [enabledVariants]);
+
+  const cssImport = `<style>
+  @import url("${returnURL(enabledVariants)}");
+</style>`;
+  // I want to filter this link "https://fonts.googleapis.com/css?family=ADLaM+Display:regular|ABeeZee:regular,italic" from <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ADLaM+Display:regular|ABeeZee:regular,italic">
 
   return (
     <div className="p-5">
@@ -60,8 +39,8 @@ export default function EmbeddedCode() {
       </div>
       <div className="flex gap-5">
         <div className="flex flex-col gap-8">
-          {selectedFont.length > 0 ? (
-            selectedFont.map((font, index) => (
+          {enabledVariants.length > 0 ? (
+            enabledVariants.map((font, index) => (
               <CustomizeLinkCard
                 key={index}
                 fontName={font.family}
@@ -72,11 +51,28 @@ export default function EmbeddedCode() {
             <p>No fonts selected.</p>
           )}
         </div>
-        <div className="w-min">
+        <div className="w-[50em]">
           <div className="mb-5 flex flex-col w-full">
-            <h2 className="text-xl font-semibold">HTML Code:</h2>
+            <h2 className="text-xl font-semibold">Code:</h2>
             <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap">
-              <code className="text-xs">{embedCode}</code>
+              <div className="flex items-center">
+                <Checkbox
+                  checked={checked}
+                  onCheckedChange={() => setChecked(!checked)}
+                />
+                {"<link>"}
+                <Checkbox
+                  checked={!checked}
+                  onCheckedChange={() => setChecked(!checked)}
+                  className="ml-5"
+                />
+                {"@import"}
+              </div>
+              {checked ? (
+                <code className="text-xs">{embedCode}</code>
+              ) : (
+                <code className="text-xs">{cssImport}</code>
+              )}
             </pre>
           </div>
           <div className="mb-5 flex flex-col w-full">

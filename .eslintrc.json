@@ -9,6 +9,7 @@
     "tw": true,
     "chrome": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 10,
     "ecmaFeatures": {

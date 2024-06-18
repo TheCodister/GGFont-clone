@@ -2,6 +2,7 @@ export default interface Font {
   family: string;
   variants: string[];
   // category: string;
+  enabledVariants: string[];
   files: {
     [key: string]: string;
   };

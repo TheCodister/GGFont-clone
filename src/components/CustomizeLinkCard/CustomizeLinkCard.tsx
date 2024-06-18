@@ -2,6 +2,7 @@ import React from "react";
 import SwitchVariant from "../SwitchVariant/SwitchVariant";
 import { useAppContext } from "@/contexts/context";
 import useLazyLoad from "@/hooks/useLazyLoad/useLazyLoad";
+import { variantNameConverter } from "@/utils";
 
 interface FontCardProps {
   fontName: string;
@@ -10,12 +11,8 @@ interface FontCardProps {
 
 const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
   const [isIntersecting, ref] = useLazyLoad();
-  const fontUrl = `https://fonts.googleapis.com/css?family=${fontName}`;
-  const { textPreview, toggleVariant, selectedFont } = useAppContext();
-
-  const handleVariantToggle = (variant: string, enabled: boolean) => {
-    toggleVariant(fontName, variant, enabled);
-  };
+  const fontUrl = `https://fonts.googleapis.com/css?family=${fontName.replace(/ /g, "+")}`;
+  const { textPreview, toggleVariant } = useAppContext();
 
   return (
     <div
@@ -44,14 +41,15 @@ const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
           key={`${fontName}-${v}`}
           className="flex gap-3 items-center justify-between w-full border-t-2 p-5"
         >
-          <h2 className="font-semibold">{v}</h2>
+          <link rel="stylesheet" href={fontUrl} />
+          <h2
+            className=""
+            style={{ fontFamily: `${fontName}, sans-serif`, fontStyle: v }}
+          >
+            {variantNameConverter(v)}
+          </h2>
           <SwitchVariant
-            key={`${fontName}-${v}`}
-            variant={v}
-            enabled={selectedFont.some(
-              (font) => font.family === fontName && font.variants.includes(v)
-            )}
-            onChange={(enabled) => handleVariantToggle(v, enabled)}
+            onChange={(enabled) => toggleVariant(fontName, v, enabled)}
           />
         </div>
       ))}

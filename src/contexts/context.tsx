@@ -10,6 +10,7 @@ interface AppContextType {
   size: string;
   selectedFont: Font[];
   selected: boolean;
+  enabledVariants: Font[];
   setSelected: (selected: boolean) => void;
   setFontDetailName: (fontdetailname: string) => void;
   setView: (view: boolean) => void;
@@ -18,7 +19,9 @@ interface AppContextType {
   setSize: (size: string) => void;
   addFont: (font: Font) => void;
   removeFont: (family: string) => void;
-  toggleVariant: (family: string, variant: string, enabled: boolean) => void;
+  setEnabledVariants: (variants: Font[]) => void;
+  toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
+  // toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
 }
 
 const defaultType: AppContextType = {
@@ -26,9 +29,10 @@ const defaultType: AppContextType = {
   fontview: false,
   fontdetailname: "",
   textPreview: "Whereas disregard and contempt for human rights have resulted",
-  size: "8px",
+  size: "48px",
   selectedFont: [],
   selected: false,
+  enabledVariants: [],
   setSelected: () => {},
   setFontDetailName: () => {},
   setView: () => {},
@@ -37,6 +41,7 @@ const defaultType: AppContextType = {
   setSize: () => {},
   addFont: () => {},
   removeFont: () => {},
+  setEnabledVariants: () => {},
   toggleVariant: () => {},
 };
 
@@ -49,9 +54,11 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [textPreview, setTextPreview] = useState(
     "Whereas disregard and contempt for human rights have resulted"
   );
+
   const [size, setSize] = useState("48px");
   const [selectedFont, setSelectedFont] = useState<Font[]>([]);
   const [selected, setSelected] = useState(false);
+  const [enabledVariants, setEnabledVariants] = useState<Font[]>(selectedFont);
 
   useEffect(() => {
     // Load selected fonts from local storage when the component mounts
@@ -61,10 +68,13 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // useEffect(() => {
-  //   // Store selected fonts in local storage whenever it changes
-  //   localStorage.setItem("selectedFont", JSON.stringify(selectedFont));
-  // }, [selectedFont]);
+  useEffect(() => {
+    // Load selected fonts from local storage when the component mounts
+    const storedFonts = localStorage.getItem("selectedFont");
+    if (storedFonts) {
+      setSelectedFont(JSON.parse(storedFonts));
+    }
+  }, []);
 
   useEffect(() => {
     // Update the selected state based on selectedFont and fontdetailname
@@ -79,6 +89,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const addFont = (font: Font) => {
     setSelectedFont((prevSelectedFonts) => {
       const updatedFonts = [...prevSelectedFonts, font];
+      font.enabledVariants = font.variants;
       localStorage.setItem("selectedFont", JSON.stringify(updatedFonts));
       return updatedFonts;
     });
@@ -94,24 +105,26 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     });
   };
 
-  const toggleVariant = (family: string, variant: string, enabled: boolean) => {
-    setSelectedFont((prevSelectedFonts) => {
-      const updatedFonts = prevSelectedFonts.map((font) => {
-        if (font.family === family) {
-          let updatedVariants: string[];
+  const toggleVariant = (
+    fontName: string,
+    variant: string,
+    enabled: boolean
+  ) => {
+    setEnabledVariants((prevEnabledVariants) => {
+      const updatedFonts = prevEnabledVariants.map((font) => {
+        if (font.family === fontName) {
+          const enabledVariantsSet = new Set(font.enabledVariants);
+
           if (enabled) {
-            // Enable the variant (add to the array if not already included)
-            updatedVariants = [...font.variants];
-            if (!updatedVariants.includes(variant)) {
-              updatedVariants.push(variant);
-            }
+            enabledVariantsSet.add(variant); // Add variant to set
           } else {
-            // Disable the variant (remove from the array)
-            updatedVariants = font.variants.filter((v) => v !== variant);
+            enabledVariantsSet.delete(variant); // Remove variant from set
           }
 
-          return { ...font, variants: updatedVariants };
+          // Convert set back to array
+          font.enabledVariants = Array.from(enabledVariantsSet);
         }
+        console.log(font);
         return font;
       });
       return updatedFonts;
@@ -136,6 +149,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         removeFont,
         selected,
         setSelected,
+        enabledVariants,
+        setEnabledVariants,
         toggleVariant,
       }}
     >
