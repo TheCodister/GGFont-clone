@@ -23,11 +23,9 @@ export default function EmbeddedCode() {
       setCssCode("");
     }
   }, [enabledVariants]);
-
   const cssImport = `<style>
   @import url("${returnURL(enabledVariants)}");
 </style>`;
-  // I want to filter this link "https://fonts.googleapis.com/css?family=ADLaM+Display:regular|ABeeZee:regular,italic" from <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ADLaM+Display:regular|ABeeZee:regular,italic">
 
   return (
     <div className="p-5">

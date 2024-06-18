@@ -39,7 +39,7 @@ export default function Selection() {
               />
             ))
           ) : (
-            <p>No fonts selected.</p>
+            <p>No font selected.</p>
           )}
         </div>
         {selectedFont.length > 0 && (
