@@ -41,6 +41,7 @@ export default function FontDetail() {
         family: pathFontName,
         variants: data[0].variants,
         files: data[0].files,
+        enabledVariants: [],
       });
     }
   };
