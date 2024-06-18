@@ -21,12 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <AppWrapper>
-          <Theme className="flex flex-col items-center">
+        <Theme className="flex flex-col items-center">
+          <AppWrapper>
             <Navbar />
             {children}
-          </Theme>
-        </AppWrapper>
+          </AppWrapper>
+        </Theme>
       </body>
     </html>
   );
