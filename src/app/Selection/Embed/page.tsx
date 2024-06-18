@@ -8,23 +8,23 @@ import { generateEmbedCode, generateCssCode, returnURL } from "@/utils";
 import { Checkbox } from "@radix-ui/themes";
 
 export default function EmbeddedCode() {
-  const { selectedFont, enabledVariants, setEnabledVariants } = useAppContext();
+  const { selectedFont } = useAppContext();
   const [embedCode, setEmbedCode] = useState("");
   const [cssCode, setCssCode] = useState("");
   const [checked, setChecked] = useState(true);
 
-  setEnabledVariants(selectedFont);
+  // setEnabledVariants(selectedFont);
   useEffect(() => {
-    if (enabledVariants.length > 0) {
-      setEmbedCode(generateEmbedCode(enabledVariants));
-      setCssCode(generateCssCode(enabledVariants));
+    if (selectedFont.length > 0) {
+      setEmbedCode(generateEmbedCode(selectedFont));
+      setCssCode(generateCssCode(selectedFont));
     } else {
       setEmbedCode("");
       setCssCode("");
     }
-  }, [enabledVariants]);
+  }, [selectedFont]);
   const cssImport = `<style>
-  @import url("${returnURL(enabledVariants)}");
+  @import url("${returnURL(selectedFont)}");
 </style>`;
 
   return (
@@ -37,8 +37,8 @@ export default function EmbeddedCode() {
       </div>
       <div className="flex gap-5">
         <div className="flex flex-col gap-8">
-          {enabledVariants.length > 0 ? (
-            enabledVariants.map((font, index) => (
+          {selectedFont.length > 0 ? (
+            selectedFont.map((font, index) => (
               <CustomizeLinkCard
                 key={index}
                 fontName={font.family}

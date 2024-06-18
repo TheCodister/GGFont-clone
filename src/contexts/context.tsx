@@ -10,7 +10,6 @@ interface AppContextType {
   size: string;
   selectedFont: Font[];
   selected: boolean;
-  enabledVariants: Font[];
   setSelected: (selected: boolean) => void;
   setFontDetailName: (fontdetailname: string) => void;
   setView: (view: boolean) => void;
@@ -19,7 +18,6 @@ interface AppContextType {
   setSize: (size: string) => void;
   addFont: (font: Font) => void;
   removeFont: (family: string) => void;
-  setEnabledVariants: (variants: Font[]) => void;
   toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
   // toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
 }
@@ -32,7 +30,6 @@ const defaultType: AppContextType = {
   size: "48px",
   selectedFont: [],
   selected: false,
-  enabledVariants: [],
   setSelected: () => {},
   setFontDetailName: () => {},
   setView: () => {},
@@ -41,7 +38,6 @@ const defaultType: AppContextType = {
   setSize: () => {},
   addFont: () => {},
   removeFont: () => {},
-  setEnabledVariants: () => {},
   toggleVariant: () => {},
 };
 
@@ -58,7 +54,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [size, setSize] = useState("48px");
   const [selectedFont, setSelectedFont] = useState<Font[]>([]);
   const [selected, setSelected] = useState(false);
-  const [enabledVariants, setEnabledVariants] = useState<Font[]>(selectedFont);
 
   useEffect(() => {
     // Load selected fonts from local storage when the component mounts
@@ -110,8 +105,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
     variant: string,
     enabled: boolean
   ) => {
-    setEnabledVariants((prevEnabledVariants) => {
-      const updatedFonts = prevEnabledVariants.map((font) => {
+    setSelectedFont((prevSelectedFonts) => {
+      const updatedFonts = prevSelectedFonts.map((font) => {
         if (font.family === fontName) {
           const enabledVariantsSet = new Set(font.enabledVariants);
 
@@ -149,8 +144,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         removeFont,
         selected,
         setSelected,
-        enabledVariants,
-        setEnabledVariants,
         toggleVariant,
       }}
     >
