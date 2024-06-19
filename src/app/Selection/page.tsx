@@ -5,23 +5,11 @@ import { Button } from "@radix-ui/themes";
 import Download from "@/assets/download.svg";
 import Code from "@/assets/code.svg";
 import Link from "next/link";
+import { downloadFonts } from "@/utils";
 
 export default function Selection() {
   const { selectedFont } = useAppContext();
 
-  const handleDownload = () => {
-    selectedFont.forEach((font) => {
-      font.variants.forEach((variant) => {
-        const fileUrl = font.files[variant];
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = `${font.family}-${variant}.ttf`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      });
-    });
-  };
   return (
     <div className=" flex flex-col justify-center p-5 w-10/12">
       <h1 className="text-4xl font-normal mb-5">
@@ -53,7 +41,7 @@ export default function Selection() {
               size="4"
               radius="full"
               className="w-80 text-base"
-              onClick={handleDownload}
+              onClick={() => downloadFonts(selectedFont)}
             >
               <Download width={20} height={20} alt="logo" /> Download all (
               {selectedFont.length})

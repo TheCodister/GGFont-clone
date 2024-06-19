@@ -3,7 +3,7 @@ import { useAppContext } from "@/contexts/context";
 import { useEffect, useState } from "react";
 import ArrowBack from "@/assets/arrowback.svg";
 import Link from "next/link";
-import CustomizeLinkCard from "@/components/CustomizeLinkCard/CustomizeLinkCard";
+import { CustomizeLinkCard } from "@/components";
 import { generateEmbedCode, generateCssCode, returnURL } from "@/utils";
 import { Checkbox } from "@radix-ui/themes";
 

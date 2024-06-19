@@ -3,8 +3,7 @@ import FontCard from "../FontCard/FontCard";
 import FontCardGrid from "../FontCardGrid/FontCardGrid";
 import { GetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
-import HoverCardDemo from "../HoverCard/HoverCard";
-import SwitchViewButton from "../SwitchViewButton/SwitchViewButton";
+import { HoverCard, SwitchViewButton } from "..";
 import Font from "@/types/Font";
 import { Button } from "@radix-ui/themes";
 import Tune from "@/assets/tune.svg";
@@ -39,7 +38,7 @@ export default function ListFontDisplay() {
       <div className="flex items-center w-full justify-between mb-8">
         <p className="justify-self-start text-xs">1644 of 1644 families</p>
         <div className="flex items-center">
-          <HoverCardDemo />
+          <HoverCard />
           <SwitchViewButton />
         </div>
       </div>

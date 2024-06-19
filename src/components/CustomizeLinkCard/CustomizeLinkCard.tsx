@@ -1,8 +1,7 @@
-import React from "react";
 import SwitchVariant from "../SwitchVariant/SwitchVariant";
 import { useAppContext } from "@/contexts/context";
 import useLazyLoad from "@/hooks/useLazyLoad/useLazyLoad";
-import { variantNameConverter } from "@/utils";
+import { variantNameConverter, isItalic, fontWeightConverter } from "@/utils";
 
 interface FontCardProps {
   fontName: string;
@@ -13,7 +12,6 @@ const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
   const [isIntersecting, ref] = useLazyLoad();
   const fontUrl = `https://fonts.googleapis.com/css?family=${fontName.replace(/ /g, "+")}`;
   const { textPreview, toggleVariant } = useAppContext();
-
   return (
     <div
       ref={ref}
@@ -44,7 +42,11 @@ const CustomizeLinkCard = ({ fontName, variant }: FontCardProps) => {
           <link rel="stylesheet" href={fontUrl} />
           <h2
             className=""
-            style={{ fontFamily: `${fontName}, sans-serif`, fontStyle: v }}
+            style={{
+              fontFamily: `${fontName}, sans-serif`,
+              fontStyle: isItalic(v),
+              fontWeight: fontWeightConverter(v),
+            }}
           >
             {variantNameConverter(v)}
           </h2>

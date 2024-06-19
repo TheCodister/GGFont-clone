@@ -2,38 +2,22 @@
 import { useEffect } from "react";
 import { GetFontVariantFile } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
-import PreviewText from "@/components/PreviewText/PreviewText";
-import SliderBar from "@/components/SliderBar/SliderBar";
-import SelectBar from "@/components/SelectBar/SelectBar";
-import FontVarCard from "@/components/FontVarCard/FontVarCard";
+import { PreviewText, SliderBar, SelectBar, FontVarCard } from "@/components";
 import { usePathname } from "next/navigation";
 import { Button } from "@radix-ui/themes";
 
 export default function FontDetail() {
-  const {
-    addFont,
-    selected,
-    setSelected,
-    selectedFont,
-    removeFont,
-    setFontDetailName,
-  } = useAppContext();
+  const { addFont, selected, removeFont, setFontDetailName } = useAppContext();
+
   const pathFontName = usePathname()
     .replace("/fontdetail/", "")
     .replace(/%20/g, " ");
 
+  const fontUrl = `https://fonts.googleapis.com/css?family=${pathFontName}`;
+
   useEffect(() => {
     setFontDetailName(pathFontName);
   }, [pathFontName, setFontDetailName]);
-
-  const { data, isLoading, isError } = GetFontVariantFile(pathFontName);
-
-  useEffect(() => {
-    const isFontSelected = selectedFont.some(
-      (font) => font.family === pathFontName
-    );
-    setSelected(isFontSelected);
-  }, [selectedFont, pathFontName, setSelected]);
 
   const handleClick = () => {
     if (data) {
@@ -46,8 +30,7 @@ export default function FontDetail() {
     }
   };
 
-  const fontUrl = `https://fonts.googleapis.com/css?family=${pathFontName}`;
-
+  const { data, isLoading, isError } = GetFontVariantFile(pathFontName);
   if (isLoading) {
     return (
       <div>
@@ -62,7 +45,6 @@ export default function FontDetail() {
       </div>
     );
   }
-
   return (
     <div className="flex flex-col gap-5 w-full mt-5">
       {selected ? (
