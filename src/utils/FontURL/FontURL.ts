@@ -1,4 +1,4 @@
-import Font from "@/types/Font";
+import Font from "@/types/font";
 const returnURL = (enabledVariants: Font[]) => {
   const filteredFonts = enabledVariants.map((font) => {
     const enabledVariantsSet = new Set(font.enabledVariants); // Use a set to avoid duplicates

@@ -1,10 +1,8 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import Font from "@/types/Font";
+import Font from "@/types/font";
 
 interface AppContextType {
-  view: boolean;
-  fontview: boolean;
   fontdetailname: string;
   textPreview: string;
   size: string;
@@ -13,8 +11,6 @@ interface AppContextType {
   toggleSidebar: boolean;
   setSelected: (selected: boolean) => void;
   setFontDetailName: (fontdetailname: string) => void;
-  setView: (view: boolean) => void;
-  setFontView: (fontview: boolean) => void;
   setTextPreview: (textPreview: string) => void;
   setSize: (size: string) => void;
   addFont: (font: Font) => void;
@@ -24,8 +20,6 @@ interface AppContextType {
 }
 
 const defaultType: AppContextType = {
-  view: false,
-  fontview: false,
   fontdetailname: "",
   textPreview: "Whereas disregard and contempt for human rights have resulted",
   size: "48",
@@ -34,8 +28,6 @@ const defaultType: AppContextType = {
   toggleSidebar: false,
   setSelected: () => {},
   setFontDetailName: () => {},
-  setView: () => {},
-  setFontView: () => {},
   setTextPreview: () => {},
   setSize: () => {},
   addFont: () => {},
@@ -47,8 +39,6 @@ const defaultType: AppContextType = {
 const AppContext = createContext<AppContextType>(defaultType);
 
 export function AppWrapper({ children }: { children: React.ReactNode }) {
-  const [view, setView] = useState(false);
-  const [fontview, setFontView] = useState(false);
   const [fontdetailname, setFontDetailName] = useState("");
   const [textPreview, setTextPreview] = useState(
     "Whereas disregard and contempt for human rights have resulted"
@@ -132,10 +122,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   return (
     <AppContext.Provider
       value={{
-        view,
-        setView,
-        fontview,
-        setFontView,
         fontdetailname,
         setFontDetailName,
         textPreview,

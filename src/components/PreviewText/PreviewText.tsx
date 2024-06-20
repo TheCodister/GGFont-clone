@@ -18,7 +18,7 @@ export default function PreviewText() {
       size="3"
       radius="full"
       variant="soft"
-      className="xl:w-[70em] lg:w-[60em] sm:w-[40em] h-14 pl-5"
+      className="w-[60vw] h-14 pl-5"
       placeholder="Type here to preview text"
       value={value}
       onChange={handleChange}

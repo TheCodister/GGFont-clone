@@ -3,12 +3,13 @@ import Bag from "/src/assets/shoppingbag.svg";
 import Link from "next/link";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { useAppContext } from "@/contexts/context";
+import ROUTES from "@/constants/routes/routes";
 
 export default function BagButton() {
   const { selectedFont } = useAppContext();
   return (
-    <Link href="/selection">
-      <div className="flex ml-12 mt-2 items-center justify-center w-4 absolute bg-blue-600 text-xs text-white rounded-full">
+    <Link href={ROUTES.SELECTION}>
+      <div className="flex xl:ml-12 min-[320px]:ml-8 mt-2 items-center justify-center w-4 absolute bg-blue-600 text-xs text-white rounded-full">
         {selectedFont.length}
       </div>
       <HoverCard.Root openDelay={100} closeDelay={100}>
@@ -18,7 +19,7 @@ export default function BagButton() {
             variant="soft"
             color="gray"
             radius="full"
-            className="ml-5 bg-transparent hover:bg-gray-200"
+            className="xl:ml-5 min-[320px]:ml-1 bg-transparent hover:bg-gray-200"
           >
             <Bag width={25} height={25} alt="logo" />
           </IconButton>

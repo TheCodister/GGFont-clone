@@ -1,6 +1,6 @@
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import Font from "@/types/Font";
+import Font from "@/types/font";
 
 const downloadFonts = async (selectedFont: Font[]) => {
   const zip = new JSZip();

@@ -3,7 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { Theme } from "@radix-ui/themes";
-import Navbar from "@/components/Navbar/Navbar";
+import Header from "@/components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
 import { AppWrapper } from "@/contexts/context";
 
@@ -26,7 +26,7 @@ export default function RootLayout({
           <AppWrapper>
             <SideBar />
             <main className="flex flex-col items-center">
-              <Navbar />
+              <Header />
               {children}
             </main>
           </AppWrapper>

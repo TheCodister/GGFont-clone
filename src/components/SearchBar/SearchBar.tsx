@@ -7,7 +7,7 @@ export default function SearchBar() {
       size="3"
       radius="full"
       variant="soft"
-      className="xl:w-[80em] lg:w-[60em] sm: w-[40em] h-14"
+      className="h-14 xl:w-[65vw] min-[320px]:w-[60vw]"
       placeholder="Search fonts"
       color="gray"
     >

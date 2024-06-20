@@ -1,15 +1,17 @@
 "use client";
-import FontCard from "../FontCard/FontCard";
+import FontCard from "../FontCardHor/FontCardHor";
 import FontCardGrid from "../FontCardGrid/FontCardGrid";
-import { GetFonts } from "@/api/services/getFont";
+import { useGetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
 import { HoverCard, SwitchViewButton } from "..";
-import Font from "@/types/Font";
+import { useState } from "react";
+import Font from "@/types/font";
 import { Button } from "@radix-ui/themes";
 import Tune from "@/assets/tune.svg";
 export default function ListFontDisplay() {
-  const { view, setToggleSidebar, toggleSidebar } = useAppContext();
-  const { data, isLoading, isError } = GetFonts();
+  const { setToggleSidebar, toggleSidebar } = useAppContext();
+  const [isGridview, setIsGridview] = useState(false);
+  const { data, isLoading, isError } = useGetFonts();
   if (isLoading) {
     return (
       <div>
@@ -25,7 +27,7 @@ export default function ListFontDisplay() {
     );
   }
   return (
-    <div className="flex flex-col w-full">
+    <div className="w-full container max-w-[1500px]">
       <Button
         size="3"
         variant="outline"
@@ -40,11 +42,14 @@ export default function ListFontDisplay() {
         <p className="justify-self-start text-xs">1644 of 1644 families</p>
         <div className="flex items-center">
           <HoverCard />
-          <SwitchViewButton />
+          <SwitchViewButton
+            isGridview={isGridview}
+            setIsGridview={setIsGridview}
+          />
         </div>
       </div>
-      {view ? (
-        <div className="flex flex-col items-center gap-2 w-full overflow-auto">
+      {!isGridview ? (
+        <div className="gap-2 w-full ">
           {data &&
             data.data.items.map((font: Font) => (
               <FontCard
@@ -56,7 +61,7 @@ export default function ListFontDisplay() {
             ))}
         </div>
       ) : (
-        <div className="grid gap-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full overflow-auto ">
+        <div className="grid gap-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full">
           {data &&
             data.data.items.map((font: Font) => (
               <FontCardGrid

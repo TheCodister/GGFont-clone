@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { GetFontVariantFile } from "@/api/services/getFont";
+import { useGetFontVariantFile } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
 import { PreviewText, SliderBar, SelectBar, FontVarCard } from "@/components";
 import { usePathname } from "next/navigation";
@@ -30,7 +30,7 @@ export default function FontDetail() {
     }
   };
 
-  const { data, isLoading, isError } = GetFontVariantFile(pathFontName);
+  const { data, isLoading, isError } = useGetFontVariantFile(pathFontName);
   if (isLoading) {
     return (
       <div>
@@ -46,7 +46,7 @@ export default function FontDetail() {
     );
   }
   return (
-    <div className="flex flex-col gap-5 w-full mt-5">
+    <div className="flex flex-col gap-5 w-full mt-5 container max-w-[1500px] p-5">
       {selected ? (
         <Button
           size="3"
@@ -71,23 +71,25 @@ export default function FontDetail() {
         </Button>
       )}
       <h1 className="text-5xl font-semibold">{pathFontName}</h1>
-      <p>Design by Google</p>
-      <div className="h-60 w-[90em] text-center mt-10">
+      <h2>Design by Google</h2>
+      <div className="h-60 text-center mt-10 overflow-hidden">
         <link rel="stylesheet" href={fontUrl}></link>
         <h1
-          className="text-6xl overflow-hidden pt-5 pb-5"
+          className="text-6xl pt-5 pb-5 text-ellipsis"
           style={{ fontFamily: `${pathFontName}, sans-serif` }}
         >
           Whereas disregard and contempt for human rights have resulted
         </h1>
       </div>
       <h1 className="text-4xl">Styles</h1>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-5 xl:flex-row min-[320px]:flex-col">
         <PreviewText />
-        <SelectBar />
-        <SliderBar />
+        <div className="flex items-center">
+          <SelectBar />
+          <SliderBar />
+        </div>
       </div>
-      <div className="flex flex-col items-center">
+      <div>
         {data &&
           data[0].variants.map((variant: string, index: number) => (
             <FontVarCard

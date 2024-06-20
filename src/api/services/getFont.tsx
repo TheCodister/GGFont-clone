@@ -8,7 +8,7 @@ const fetcher = async () => {
   return res;
 };
 
-const GetFonts = () => {
+const useGetFonts = () => {
   const { data, error } = useSWR("fonts", fetcher);
   return {
     data: data,
@@ -25,7 +25,7 @@ async function fetchFontVariant(fontName: string) {
   return res.data.items;
 }
 
-const GetFontVariantFile = (fontName: string) => {
+const useGetFontVariantFile = (fontName: string) => {
   const { data, error } = useSWR(
     "fontVariant",
     () => fetchFontVariant(fontName),
@@ -40,4 +40,4 @@ const GetFontVariantFile = (fontName: string) => {
   };
 };
 
-export { GetFonts, GetFontVariantFile };
+export { useGetFonts, useGetFontVariantFile };

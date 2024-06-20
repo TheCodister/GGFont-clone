@@ -12,13 +12,13 @@ export default function FontVarCard(props: FontCardProps) {
   const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
   return (
-    <div className="flex flex-col lg:w-[86em] md:w-[50em] border-solid border-t-2 p-5 rounded overflow-auto">
-      <div className="flex gap-3 items-center">
-        <h2 className="font-semibold">{variantNameConverter(props.variant)}</h2>
+    <div className="border-solid border-t-2 p-5">
+      <div>
+        <h1 className="font-semibold">{variantNameConverter(props.variant)}</h1>
       </div>
 
       <link rel="stylesheet" href={fontUrl}></link>
-      <h1
+      <h2
         className="text-5xl overflow-hidden pt-5 pb-5"
         style={{
           fontFamily: `${name}`,
@@ -28,7 +28,7 @@ export default function FontVarCard(props: FontCardProps) {
         }}
       >
         {textPreview}
-      </h1>
+      </h2>
     </div>
   );
 }
