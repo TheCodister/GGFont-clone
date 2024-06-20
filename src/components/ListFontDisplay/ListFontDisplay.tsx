@@ -1,27 +1,17 @@
 "use client";
-import InfiniteScroll from "react-infinite-scroll-component";
-import FontCard from "../FontCard/FontCard";
+import FontCard from "../FontCardHor/FontCardHor";
 import FontCardGrid from "../FontCardGrid/FontCardGrid";
-import { GetFonts } from "@/api/services/getFont";
+import { useGetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
-// import GetKey from "@/utils/GetKey/Getkey";
-// import useSWRInfinite from "swr/infinite";
-interface Font {
-  family: string;
-  variants: string[];
-  category: string;
-  files: {
-    [key: string]: string;
-  };
-  version: string;
-  lastModified: string;
-  subsets: string[];
-  kind: string;
-}
+import { HoverCard, SwitchViewButton } from "..";
+import { useState } from "react";
+import Font from "@/types/font";
+import { Button } from "@radix-ui/themes";
+import Tune from "@/assets/tune.svg";
 export default function ListFontDisplay() {
-  // const { data, size, setSize } = useSWRInfinite(GetKey, GetFonts);
-  const { view } = useAppContext();
-  const { data, isLoading, isError } = GetFonts();
+  const { setToggleSidebar, toggleSidebar } = useAppContext();
+  const [isGridview, setIsGridview] = useState(false);
+  const { data, isLoading, isError } = useGetFonts();
   if (isLoading) {
     return (
       <div>
@@ -37,37 +27,50 @@ export default function ListFontDisplay() {
     );
   }
   return (
-    <div className="flex w-full">
-      {/* <InfiniteScroll
-          dataLength={data.data.items.length}
-          next={GetFonts}
-          hasMore={true}
-          loader={<h1>Loading</h1>}
-        >
+    <div className="w-full container max-w-[1500px]">
+      <Button
+        size="3"
+        variant="outline"
+        radius="full"
+        color="indigo"
+        className="h-12 w-26 self-start mb-5"
+        onClick={() => setToggleSidebar(!toggleSidebar)}
+      >
+        <Tune width={20} height={20} alt="logo" /> Filters
+      </Button>
+      <div className="flex items-center w-full justify-between mb-8">
+        <p className="justify-self-start text-xs">1644 of 1644 families</p>
+        <div className="flex items-center">
+          <HoverCard />
+          <SwitchViewButton
+            isGridview={isGridview}
+            setIsGridview={setIsGridview}
+          />
+        </div>
+      </div>
+      {!isGridview ? (
+        <div className="gap-2 w-full ">
           {data &&
             data.data.items.map((font: Font) => (
               <FontCard
                 fontName={font.family}
                 numVariants={font.variants.length}
                 creator="Google"
+                key={font.family}
               />
             ))}
-        </InfiniteScroll> */}
-      {view ? (
-        <div className="flex flex-col gap-2 w-[90em] overflow-auto">
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
-          <FontCard fontName="Name" numVariants={1} creator="Google" />
         </div>
       ) : (
-        <div className="grid gap-5 lg:grid-cols-4 w-full overflow-auto md:grid-cols-2 ">
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
-          <FontCardGrid fontName="Name" numVariants={1} creator="Google" />
+        <div className="grid gap-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full">
+          {data &&
+            data.data.items.map((font: Font) => (
+              <FontCardGrid
+                fontName={font.family}
+                numVariants={font.variants.length}
+                creator="Google"
+                key={font.family}
+              />
+            ))}
         </div>
       )}
     </div>

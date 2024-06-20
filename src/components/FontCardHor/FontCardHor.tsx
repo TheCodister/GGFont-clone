@@ -1,33 +1,36 @@
-import { useAppContext } from "@/contexts/context";
 import Link from "next/link";
 import useLazyLoad from "@/hooks/useLazyLoad/useLazyLoad";
+import { useAppContext } from "@/contexts/context";
 import ROUTES from "@/constants/routes/routes";
+
 interface FontCardProps {
   fontName: string;
   numVariants: number;
   creator: string;
 }
 
-export default function FontCardGrid(props: FontCardProps) {
-  const name = props.fontName;
+export default function FontCard(props: FontCardProps) {
   const [isIntersecting, ref] = useLazyLoad();
-  const { setFontDetailName, textPreview, size } = useAppContext();
+  const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
+  const { setFontDetailName, textPreview, size } = useAppContext();
+
   return (
     <Link href={ROUTES.FONTDETAIL + name}>
       <div
         ref={ref}
-        className="flex flex-col h-[500px] border-solid border-2 p-5 hover:bg-slate-100 cursor-pointer rounded-lg"
+        className="flex flex-col h-52 border-solid border-b-2 p-5 hover:bg-slate-100 cursor-pointer rounded"
         onClick={() => setFontDetailName(name)}
         role="button"
         tabIndex={0}
         onKeyDown={() => {}}
       >
-        <div className="flex gap-3 items-center justify-between">
-          <h1 className="font-semibold self-end">{name}</h1>
-          <p>{props.numVariants} styles</p>
+        <div className="flex gap-3 items-center">
+          <h1 className="font-semibold">{name}</h1>
+          <h2>{props.numVariants} variant</h2>
+          <h2>|</h2>
+          <h2>{props.creator}</h2>
         </div>
-        <p>{props.creator}</p>
         {isIntersecting && (
           <>
             <link rel="stylesheet" href={fontUrl}></link>

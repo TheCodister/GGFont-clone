@@ -1,16 +1,14 @@
-"use client";
 import axios from "axios";
-import API_KEY from "../api_key";
 import useSWR from "swr";
 // const fetcher = (...args) => fetch(...args).then((res) => res.json());
 const fetcher = async () => {
   const res = await axios.get(
-    "https://www.googleapis.com/webfonts/v1/webfonts?key=" + API_KEY
+    "https://www.googleapis.com/webfonts/v1/webfonts?key=" + process.env.API_KEY
   );
   return res;
 };
 
-const GetFonts = () => {
+const useGetFonts = () => {
   const { data, error } = useSWR("fonts", fetcher);
   return {
     data: data,
@@ -19,26 +17,22 @@ const GetFonts = () => {
   };
 };
 
-// const getFontVariantFile = async (fileUrl: string) => {
-//   return axios
-//     .get(fileUrl, { responseType: "blob" })
-//     .then((result) => ({
-//       status: "ok",
-//       data: result.data,
-//     }))
-//     .catch((error) => ({
-//       status: "error",
-//       error: error.data,
-//     }));
-// };
-
-async function fetchFontVariant(fileUrl: string) {
-  const res = await axios.get(fileUrl, { responseType: "blob" });
-  return res;
+async function fetchFontVariant(fontName: string) {
+  const res = await axios.get(
+    `https://www.googleapis.com/webfonts/v1/webfonts?key=${process.env.API_KEY}&family=${fontName}`
+  );
+  // console.log(res.data.items[0].variants);
+  return res.data.items;
 }
 
-const GetFontVariantFile = async (fileUrl: string) => {
-  const { data, error } = useSWR(fileUrl, fetchFontVariant);
+const useGetFontVariantFile = (fontName: string) => {
+  const { data, error } = useSWR(
+    "fontVariant",
+    () => fetchFontVariant(fontName),
+    {
+      revalidateOnFocus: false,
+    }
+  );
   return {
     data: data,
     isLoading: !error && !data,
@@ -46,4 +40,4 @@ const GetFontVariantFile = async (fileUrl: string) => {
   };
 };
 
-export { GetFonts, GetFontVariantFile };
+export { useGetFonts, useGetFontVariantFile };
