@@ -8,7 +8,7 @@ import Font from "@/types/Font";
 import { Button } from "@radix-ui/themes";
 import Tune from "@/assets/tune.svg";
 export default function ListFontDisplay() {
-  const { view } = useAppContext();
+  const { view, setToggleSidebar, toggleSidebar } = useAppContext();
   const { data, isLoading, isError } = GetFonts();
   if (isLoading) {
     return (
@@ -32,6 +32,7 @@ export default function ListFontDisplay() {
         radius="full"
         color="indigo"
         className="h-12 w-26 self-start mb-5"
+        onClick={() => setToggleSidebar(!toggleSidebar)}
       >
         <Tune width={20} height={20} alt="logo" /> Filters
       </Button>

@@ -8,7 +8,7 @@ export default function SelectBar() {
       defaultValue="48px"
       size="3"
       value={size}
-      onValueChange={() => setSize(size)}
+      onValueChange={(newSize) => setSize(newSize)}
     >
       <Select.Trigger
         radius="large"

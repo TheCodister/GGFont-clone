@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import { Theme } from "@radix-ui/themes";
 import Navbar from "@/components/Navbar/Navbar";
+import SideBar from "@/components/SideBar/SideBar";
 import { AppWrapper } from "@/contexts/context";
 
 const outfit = Outfit({ subsets: ["latin"] });
@@ -21,10 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <Theme className="flex flex-col items-center">
+        <Theme className="flex">
           <AppWrapper>
-            <Navbar />
-            {children}
+            <SideBar />
+            <main className="flex flex-col items-center">
+              <Navbar />
+              {children}
+            </main>
           </AppWrapper>
         </Theme>
       </body>

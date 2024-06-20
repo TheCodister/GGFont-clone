@@ -10,6 +10,7 @@ interface AppContextType {
   size: string;
   selectedFont: Font[];
   selected: boolean;
+  toggleSidebar: boolean;
   setSelected: (selected: boolean) => void;
   setFontDetailName: (fontdetailname: string) => void;
   setView: (view: boolean) => void;
@@ -19,7 +20,7 @@ interface AppContextType {
   addFont: (font: Font) => void;
   removeFont: (family: string) => void;
   toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
-  // toggleVariant: (fontName: string, variant: string, enabled: boolean) => void;
+  setToggleSidebar: (toggleSidebar: boolean) => void;
 }
 
 const defaultType: AppContextType = {
@@ -27,9 +28,10 @@ const defaultType: AppContextType = {
   fontview: false,
   fontdetailname: "",
   textPreview: "Whereas disregard and contempt for human rights have resulted",
-  size: "48px",
+  size: "48",
   selectedFont: [],
   selected: false,
+  toggleSidebar: false,
   setSelected: () => {},
   setFontDetailName: () => {},
   setView: () => {},
@@ -39,6 +41,7 @@ const defaultType: AppContextType = {
   addFont: () => {},
   removeFont: () => {},
   toggleVariant: () => {},
+  setToggleSidebar: () => {},
 };
 
 const AppContext = createContext<AppContextType>(defaultType);
@@ -50,7 +53,7 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   const [textPreview, setTextPreview] = useState(
     "Whereas disregard and contempt for human rights have resulted"
   );
-
+  const [toggleSidebar, setToggleSidebar] = useState(false);
   const [size, setSize] = useState("48px");
   const [selectedFont, setSelectedFont] = useState<Font[]>([]);
   const [selected, setSelected] = useState(false);
@@ -145,6 +148,8 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
         selected,
         setSelected,
         toggleVariant,
+        toggleSidebar,
+        setToggleSidebar,
       }}
     >
       {children}

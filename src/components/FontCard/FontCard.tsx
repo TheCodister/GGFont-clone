@@ -11,7 +11,7 @@ export default function FontCard(props: FontCardProps) {
   const name = props.fontName;
   const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
   const link = "/fontdetail/" + name;
-  const { setFontView, setFontDetailName, textPreview } = useAppContext();
+  const { setFontView, setFontDetailName, textPreview, size } = useAppContext();
   const handleClick = () => {
     setFontDetailName(name);
     setFontView(true);
@@ -37,7 +37,11 @@ export default function FontCard(props: FontCardProps) {
             <link rel="stylesheet" href={fontUrl}></link>
             <h1
               className="text-5xl overflow-hidden pt-5 pb-5"
-              style={{ fontFamily: `${name}, sans-serif` }}
+              style={{
+                fontFamily: `${name}, sans-serif`,
+                fontWeight: 400,
+                fontSize: `${size})`,
+              }}
             >
               {textPreview}
             </h1>

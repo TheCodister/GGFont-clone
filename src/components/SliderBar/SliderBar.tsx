@@ -1,16 +1,17 @@
 import * as Slider from "@radix-ui/react-slider";
 import { useAppContext } from "../../contexts/context";
 export default function SliderBar() {
-  const { setSize } = useAppContext();
+  const { setSize, size } = useAppContext();
   return (
     <form>
       <Slider.Root
-        className="relative flex items-center select-none touch-none w-[300px] h-5"
+        className="relative flex items-center select-none touch-none w-[10em] h-5"
         defaultValue={[48]}
+        value={[parseInt(size)]}
         max={300}
         min={8}
         step={1}
-        onValueChange={(value) => setSize(value + "px")}
+        onValueChange={(value) => setSize(`${value}px`)}
       >
         <Slider.Track className="bg-[#d2e3fc] relative grow rounded-full h-[5px]">
           <Slider.Range className="absolute bg-[#1a73e8] rounded-full h-full" />

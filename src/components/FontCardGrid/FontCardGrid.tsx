@@ -10,7 +10,7 @@ interface FontCardProps {
 export default function FontCardGrid(props: FontCardProps) {
   const name = props.fontName;
   const [isIntersecting, ref] = useLazyLoad();
-  const { setFontView, setFontDetailName, textPreview } = useAppContext();
+  const { setFontView, setFontDetailName, textPreview, size } = useAppContext();
   const handleClick = () => {
     setFontDetailName(name);
     setFontView(true);
@@ -37,7 +37,11 @@ export default function FontCardGrid(props: FontCardProps) {
             <link rel="stylesheet" href={fontUrl}></link>
             <h1
               className="text-5xl overflow-hidden pt-5 pb-5"
-              style={{ fontFamily: `${name}, sans-serif` }}
+              style={{
+                fontFamily: `${name}, sans-serif`,
+                fontWeight: 400,
+                fontSize: `${size})`,
+              }}
             >
               {textPreview}
             </h1>
