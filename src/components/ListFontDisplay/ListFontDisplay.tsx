@@ -5,7 +5,7 @@ import { useGetFonts } from "@/api/services/getFont";
 import { useAppContext } from "@/contexts/context";
 import { HoverCard, SwitchViewButton } from "..";
 import { useState } from "react";
-import Font from "@/types/font";
+import Font from "@/types/fonts";
 import { Button } from "@radix-ui/themes";
 import Tune from "@/assets/tune.svg";
 export default function ListFontDisplay() {

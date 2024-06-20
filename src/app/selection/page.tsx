@@ -12,7 +12,7 @@ export default function Selection() {
   const { selectedFont } = useAppContext();
 
   return (
-    <div className="flex flex-col justify-center items-center p-5 w-full container max-w-[1500px]">
+    <div className="p-5 w-full container max-w-[1500px] xl:text-left min-[320px]:text-center">
       <h1 className="text-4xl font-normal mb-5">
         {selectedFont.length} font family selected
       </h1>

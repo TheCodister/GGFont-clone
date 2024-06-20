@@ -1,4 +1,4 @@
-import Font from "@/types/font";
+import Font from "@/types/fonts";
 import fontWeightConverter from "../font-weight-converter/font-weight-converter";
 const generateCssCode = (enabledVariants: Font[]) => {
   let css = "";

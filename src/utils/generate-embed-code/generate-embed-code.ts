@@ -1,4 +1,4 @@
-import Font from "@/types/font";
+import Font from "@/types/fonts";
 const generateEmbedCode = (enabledVariants: Font[]) => {
   const filteredFonts = enabledVariants.map((font) => {
     const enabledVariantsSet = new Set(font.enabledVariants); // Use a set to avoid duplicates

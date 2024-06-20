@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import Font from "@/types/font";
+import Font from "@/types/fonts";
 
 interface AppContextType {
   fontdetailname: string;
