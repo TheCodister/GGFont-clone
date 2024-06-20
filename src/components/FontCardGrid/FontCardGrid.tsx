@@ -25,9 +25,9 @@ export default function FontCardGrid(props: FontCardProps) {
       >
         <div className="flex gap-3 items-center justify-between">
           <h1 className="font-semibold self-end">{name}</h1>
-          <p>{props.numVariants} styles</p>
+          <h2>{props.numVariants} styles</h2>
         </div>
-        <p>{props.creator}</p>
+        <h2>{props.creator}</h2>
         {isIntersecting && (
           <>
             <link rel="stylesheet" href={fontUrl}></link>
