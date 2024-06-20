@@ -1,5 +1,5 @@
 import Font from "@/types/font";
-import fontWeightConverter from "../fontweightconverter/fontweightconverter";
+import fontWeightConverter from "../font-weight-converter/font-weight-converter";
 const generateCssCode = (enabledVariants: Font[]) => {
   let css = "";
   enabledVariants.forEach((font) => {
