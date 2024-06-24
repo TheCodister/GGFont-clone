@@ -9,7 +9,7 @@ export default function BagButton() {
   const { selectedFont } = useAppContext();
   return (
     <Link href={ROUTES.SELECTION}>
-      <div className="flex xl:ml-12 min-[320px]:ml-8 mt-2 items-center justify-center w-4 absolute bg-blue-600 text-xs text-white rounded-full">
+      <div className="flex xl:ml-12 min-[320px]:ml-8 mt-2 items-center justify-center w-4 absolute bg-blue-600 text-xs text-white rounded-full z-10">
         {selectedFont.length}
       </div>
       <HoverCard.Root openDelay={100} closeDelay={100}>
@@ -19,7 +19,7 @@ export default function BagButton() {
             variant="soft"
             color="gray"
             radius="full"
-            className="xl:ml-5 min-[320px]:ml-1 bg-transparent hover:bg-gray-200"
+            className="xl:ml-5 min-[320px]:ml-1 bg-transparent hover:bg-gray-200 hover:scale-110 transition-all duration-100 cursor-pointer"
           >
             <Bag width={25} height={25} alt="logo" />
           </IconButton>

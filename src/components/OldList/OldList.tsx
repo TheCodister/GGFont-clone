@@ -8,7 +8,6 @@ import { useState } from "react";
 import Font from "@/types/fonts";
 import { Button } from "@radix-ui/themes";
 import Tune from "@/assets/tune.svg";
-import Close from "@/assets/close.svg";
 export default function ListFontDisplay() {
   const { setToggleSidebar, toggleSidebar } = useAppContext();
   const [isGridview, setIsGridview] = useState(false);
@@ -28,23 +27,18 @@ export default function ListFontDisplay() {
     );
   }
   return (
-    <div className="w-full">
+    <div className="w-full container max-w-[1500px]">
       <Button
         size="3"
-        variant={toggleSidebar ? "solid" : "outline"}
+        variant="outline"
         radius="full"
         color="indigo"
-        className="h-12 w-26 self-start mb-5 cursor-pointer transition-all duration-100"
+        className="h-12 w-26 self-start mb-5"
         onClick={() => setToggleSidebar(!toggleSidebar)}
       >
-        {toggleSidebar ? (
-          <Close width={20} height={20} fill="white" alt="logo" />
-        ) : (
-          <Tune width={20} height={20} alt="logo" />
-        )}
-        Filters
+        <Tune width={20} height={20} alt="logo" /> Filters
       </Button>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex items-center w-full justify-between mb-8">
         <p className="justify-self-start text-xs">1644 of 1644 families</p>
         <div className="flex items-center">
           <HoverCard />
@@ -55,7 +49,7 @@ export default function ListFontDisplay() {
         </div>
       </div>
       {!isGridview ? (
-        <div className="w-full">
+        <div className="gap-2 w-full">
           {data &&
             data.data.items.map((font: Font) => (
               <FontCard
@@ -67,7 +61,7 @@ export default function ListFontDisplay() {
             ))}
         </div>
       ) : (
-        <div className="grid gap-5 2xl:grid-cols-4 xl:grid-cols-3 lg:grid-cols-2 md:grid-cols-1">
+        <div className="grid gap-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full">
           {data &&
             data.data.items.map((font: Font) => (
               <FontCardGrid

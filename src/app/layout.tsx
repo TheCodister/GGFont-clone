@@ -27,7 +27,7 @@ export default function RootLayout({
         <Theme className="flex">
           <AppWrapper>
             <SideBar />
-            <main className="flex flex-col items-center">
+            <main className="container max-w-[1500px] px-8">
               <Header />
               {children}
             </main>

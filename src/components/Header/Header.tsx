@@ -8,15 +8,16 @@ import Link from "next/link";
 import ROUTES from "@/constants/routes/routes";
 export default function Header() {
   return (
-    <nav className="container h-auto mt-5 sticky">
-      <div className="flex justify-center items-center max-w-full">
+    <nav className="container h-auto mt-5 sticky max-w-full">
+      <div className="flex items-center">
         <Link href={ROUTES.HOME}>
           <Image
             src={logo}
-            width={200}
+            width={250}
             height={300}
             alt="fulllogo"
             className="cursor-pointer p-2 xl:block min-[320px]:hidden"
+            priority={true}
           />
           <Image
             src={GGfontlogo}
@@ -24,6 +25,7 @@ export default function Header() {
             height={100}
             alt="smalllogo"
             className="cursor-pointer p-2 xl:hidden min-[320px]:block"
+            priority={true}
           />
         </Link>
         <SearchBar />

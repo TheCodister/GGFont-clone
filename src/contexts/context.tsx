@@ -112,7 +112,6 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
           // Convert set back to array
           font.enabledVariants = Array.from(enabledVariantsSet);
         }
-        console.log(font);
         return font;
       });
       return updatedFonts;
