@@ -28,7 +28,16 @@ export default function Selection() {
               />
             ))
           ) : (
-            <h2>No font selected.</h2>
+            <div>
+              <h2>No font selected.</h2>
+              <Button
+                onClick={() => {
+                  throw new Error("Sentry Frontend Error");
+                }}
+              >
+                Click here to select font
+              </Button>
+            </div>
           )}
         </div>
         {selectedFont.length > 0 && (
