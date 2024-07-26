@@ -54,7 +54,7 @@ export default function EmbeddedCode() {
         <div className="xl:w-[50vw] min-[320px]:w-[90vw]">
           <div className="mb-5 flex flex-col w-full">
             <h2 className="text-xl font-semibold">Code:</h2>
-            <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap">
+            <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap min-w-[55%]">
               <div className="flex items-center">
                 <Checkbox
                   checked={checked}
