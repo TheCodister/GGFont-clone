@@ -1,23 +1,20 @@
-import { useAppContext } from "@/contexts/context";
-import Link from "next/link";
-import useLazyLoad from "@/hooks/useLazyLoad/useLazyLoad";
-import ROUTES from "@/constants/routes/routes";
+import ROUTES from '@/constants/routes/routes'
+import { useAppContext } from '@/contexts/context'
+import Link from 'next/link'
 interface FontCardProps {
-  fontName: string;
-  numVariants: number;
-  creator: string;
+  fontName: string
+  numVariants: number
+  creator: string
 }
 
 export default function FontCardGrid(props: FontCardProps) {
-  const name = props.fontName;
-  const [isIntersecting, ref] = useLazyLoad();
-  const { setFontDetailName, textPreview, size } = useAppContext();
-  const fontUrl = `https://fonts.googleapis.com/css?family=${name}`;
+  const name = props.fontName
+  const { setFontDetailName, textPreview, size } = useAppContext()
+  const fontUrl = `https://fonts.googleapis.com/css?family=${name}`
   return (
     <Link href={ROUTES.FONTDETAIL + name}>
       <div
-        ref={ref}
-        className="flex flex-col h-[500px] border-solid border-2 p-5 hover:bg-slate-100 cursor-pointer rounded-lg"
+        className="flex flex-col h-[500px] w-[300px] border-solid border-2 p-5 hover:bg-slate-100 cursor-pointer rounded-lg"
         onClick={() => setFontDetailName(name)}
         role="button"
         tabIndex={0}
@@ -28,22 +25,20 @@ export default function FontCardGrid(props: FontCardProps) {
           <h2>{props.numVariants} styles</h2>
         </div>
         <h2>{props.creator}</h2>
-        {isIntersecting && (
-          <>
-            <link rel="stylesheet" href={fontUrl}></link>
-            <h2
-              className="text-5xl overflow-hidden pt-5 pb-5"
-              style={{
-                fontFamily: `${name}, sans-serif`,
-                fontWeight: 400,
-                fontSize: `${size})`,
-              }}
-            >
-              {textPreview}
-            </h2>
-          </>
-        )}
+        <>
+          <link rel="stylesheet" href={fontUrl}></link>
+          <h2
+            className="text-5xl overflow-hidden pt-5 pb-5"
+            style={{
+              fontFamily: `${name}, sans-serif`,
+              fontWeight: 400,
+              fontSize: `${size})`,
+            }}
+          >
+            {textPreview}
+          </h2>
+        </>
       </div>
     </Link>
-  );
+  )
 }

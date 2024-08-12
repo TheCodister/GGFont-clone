@@ -1,15 +1,15 @@
-"use client";
-import { useAppContext } from "@/contexts/context";
-import FontCard from "@/components/FontCardHor/FontCardHor";
-import { Button } from "@radix-ui/themes";
-import Download from "@/assets/download.svg";
-import Code from "@/assets/code.svg";
-import Link from "next/link";
-import { downloadFonts } from "@/utils";
-import ROUTES from "@/constants/routes/routes";
+'use client'
+import { useAppContext } from '@/contexts/context'
+import FontCard from '@/components/FontCardHor/FontCardHor'
+import { Button } from '@radix-ui/themes'
+import Download from '@/assets/download.svg'
+import Code from '@/assets/code.svg'
+import Link from 'next/link'
+import { downloadFonts } from '@/utils'
+import ROUTES from '@/constants/routes/routes'
 
 export default function Selection() {
-  const { selectedFont } = useAppContext();
+  const { selectedFont } = useAppContext()
 
   return (
     <div className="p-5 w-full container max-w-[1500px] xl:text-left min-[320px]:text-center">
@@ -32,7 +32,7 @@ export default function Selection() {
               <h2>No font selected.</h2>
               <Button
                 onClick={() => {
-                  throw new Error("Sentry Frontend Error");
+                  throw new Error('Sentry Frontend Error')
                 }}
               >
                 Click here to select font
@@ -43,14 +43,18 @@ export default function Selection() {
         {selectedFont.length > 0 && (
           <div className="flex flex-col items-center bg-slate-50 p-5 gap-5 h-44 rounded-xl xl:self-start w-96">
             <Link href={ROUTES.EMBED}>
-              <Button size="4" radius="full" className="w-80 text-base">
+              <Button
+                size="4"
+                radius="full"
+                className="w-80 text-base cursor-pointer"
+              >
                 <Code width={20} height={20} alt="logo" /> Get embed code
               </Button>
             </Link>
             <Button
               size="4"
               radius="full"
-              className="w-80 text-base"
+              className="w-80 text-base cursor-pointer"
               onClick={() => downloadFonts(selectedFont)}
             >
               <Download width={20} height={20} alt="logo" /> Download all (
@@ -60,5 +64,5 @@ export default function Selection() {
         )}
       </div>
     </div>
-  );
+  )
 }

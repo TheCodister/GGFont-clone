@@ -1,11 +1,11 @@
-"use client";
-import Image from "next/image";
-import logo from "@/assets/logo.png";
-import GGfontlogo from "@/assets/ggfontlogo.png";
-import SearchBar from "../SearchBar/SearchBar";
-import BagButton from "../BagButton/BagButton";
-import Link from "next/link";
-import ROUTES from "@/constants/routes/routes";
+'use client'
+import Image from 'next/image'
+import logo from '@/assets/logo.png'
+import GGfontlogo from '@/assets/ggfontlogo.png'
+import SearchBar from '../SearchBar/SearchBar'
+import BagButton from '../BagButton/BagButton'
+import Link from 'next/link'
+import ROUTES from '@/constants/routes/routes'
 export default function Header() {
   return (
     <nav className="container h-auto mt-5 sticky max-w-full">
@@ -32,5 +32,5 @@ export default function Header() {
         <BagButton />
       </div>
     </nav>
-  );
+  )
 }

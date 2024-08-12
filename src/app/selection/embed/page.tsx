@@ -1,33 +1,33 @@
-"use client";
-import { useAppContext } from "@/contexts/context";
-import { useEffect, useState } from "react";
-import ArrowBack from "@/assets/arrowback.svg";
-import Link from "next/link";
-import { CustomizeLinkCard } from "@/components";
-import { generateEmbedCode, generateCssCode, returnURL } from "@/utils";
-import { Checkbox } from "@radix-ui/themes";
-import ROUTES from "@/constants/routes/routes";
+'use client'
+import { useAppContext } from '@/contexts/context'
+import { useEffect, useState } from 'react'
+import ArrowBack from '@/assets/arrowback.svg'
+import Link from 'next/link'
+import { CustomizeLinkCard } from '@/components'
+import { generateEmbedCode, generateCssCode, returnURL } from '@/utils'
+import { Checkbox } from '@radix-ui/themes'
+import ROUTES from '@/constants/routes/routes'
 
 export default function EmbeddedCode() {
-  const { selectedFont } = useAppContext();
-  const [embedCode, setEmbedCode] = useState("");
-  const [cssCode, setCssCode] = useState("");
-  const [checked, setChecked] = useState(true);
+  const { selectedFont } = useAppContext()
+  const [embedCode, setEmbedCode] = useState('')
+  const [cssCode, setCssCode] = useState('')
+  const [checked, setChecked] = useState(true)
 
   // setEnabledVariants(selectedFont);
   useEffect(() => {
     if (selectedFont.length > 0) {
-      setEmbedCode(generateEmbedCode(selectedFont));
-      setCssCode(generateCssCode(selectedFont));
+      setEmbedCode(generateEmbedCode(selectedFont))
+      setCssCode(generateCssCode(selectedFont))
     } else {
-      setEmbedCode("");
-      setCssCode("");
+      setEmbedCode('')
+      setCssCode('')
     }
-  }, [selectedFont]);
+  }, [selectedFont])
 
   const cssImport = `<style>
   @import url("${returnURL(selectedFont)}");
-</style>`;
+</style>`
 
   return (
     <div className="p-5 w-full max-w-[1500px] container">
@@ -54,19 +54,19 @@ export default function EmbeddedCode() {
         <div className="xl:w-[50vw] min-[320px]:w-[90vw]">
           <div className="mb-5 flex flex-col w-full">
             <h2 className="text-xl font-semibold">Code:</h2>
-            <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap min-w-[55%]">
+            <pre className="bg-gray-100 p-4 rounded whitespace-pre-wrap min-w-[40vw]">
               <div className="flex items-center">
                 <Checkbox
                   checked={checked}
                   onCheckedChange={() => setChecked(!checked)}
                 />
-                {"<link>"}
+                {'<link>'}
                 <Checkbox
                   checked={!checked}
                   onCheckedChange={() => setChecked(!checked)}
                   className="ml-5"
                 />
-                {"@import"}
+                {'@import'}
               </div>
               {checked ? (
                 <code className="text-xs">{embedCode}</code>
@@ -84,5 +84,5 @@ export default function EmbeddedCode() {
         </div>
       </div>
     </div>
-  );
+  )
 }

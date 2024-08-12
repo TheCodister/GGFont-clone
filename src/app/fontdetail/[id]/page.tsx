@@ -1,23 +1,23 @@
-"use client";
-import { useEffect } from "react";
-import { useGetFontVariantFile } from "@/api/services/getFont";
-import { useAppContext } from "@/contexts/context";
-import { PreviewText, SliderBar, SelectBar, FontVarCard } from "@/components";
-import { usePathname } from "next/navigation";
-import { Button } from "@radix-ui/themes";
+'use client'
+import { FontVarCard, PreviewText, SelectBar, SliderBar } from '@/components'
+import { useAppContext } from '@/contexts/context'
+import { useGetFontVariantFile } from '@/hooks/useGetFonts'
+import { Button } from '@radix-ui/themes'
+import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function FontDetail() {
-  const { addFont, selected, removeFont, setFontDetailName } = useAppContext();
+  const { addFont, selected, removeFont, setFontDetailName } = useAppContext()
 
   const pathFontName = usePathname()
-    .replace("/fontdetail/", "")
-    .replace(/%20/g, " ");
+    .replace('/fontdetail/', '')
+    .replace(/%20/g, ' ')
 
-  const fontUrl = `https://fonts.googleapis.com/css?family=${pathFontName}`;
+  const fontUrl = `https://fonts.googleapis.com/css?family=${pathFontName}`
 
   useEffect(() => {
-    setFontDetailName(pathFontName);
-  }, [pathFontName, setFontDetailName]);
+    setFontDetailName(pathFontName)
+  }, [pathFontName, setFontDetailName])
 
   const handleClick = () => {
     if (data) {
@@ -26,24 +26,24 @@ export default function FontDetail() {
         variants: data[0].variants,
         files: data[0].files,
         enabledVariants: [],
-      });
+      })
     }
-  };
+  }
 
-  const { data, isLoading, isError } = useGetFontVariantFile(pathFontName);
+  const { data, isLoading, isError } = useGetFontVariantFile(pathFontName)
   if (isLoading) {
     return (
       <div>
         <h1>Loading...</h1>
       </div>
-    );
+    )
   }
   if (isError) {
     return (
       <div>
         <h1>Refresh the page</h1>
       </div>
-    );
+    )
   }
   return (
     <div className="flex flex-col gap-5 w-full mt-5 container max-w-[1500px] p-5">
@@ -102,5 +102,5 @@ export default function FontDetail() {
           ))}
       </div>
     </div>
-  );
+  )
 }
